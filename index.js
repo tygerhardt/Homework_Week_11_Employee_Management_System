@@ -2,17 +2,12 @@ const mysql = require('mysql');
 const inquirer = require('inquirer');
 
 
+
 var connection = mysql.createConnection({
     multipleStatements: true, 
     host: "localhost",
-  
-    // Your port; if not 3306
     port: 3306,
-  
-    // Your username
     user: "root",
-  
-    // Your password
     password: "Gerhardtwashere68!",
     database: "employee_db"
   });
@@ -128,7 +123,7 @@ function addRole() {
           {
             name: "departmentName",
             type: "list",
-// is there a way to make the options here the results of a query that selects all departments?`
+
             message: "Which department does this role fall under?",
             choices: function() {
                 var choicesArray = [];
@@ -141,7 +136,7 @@ function addRole() {
               }
           }
           ]) 
-// in order to get the id here, i need a way to grab it from the departments table 
+
         .then(function(answer) {
         const department = answer.departmentName;
         connection.query('SELECT * FROM DEPARTMENT', function(err, res) {
@@ -182,7 +177,7 @@ async function addEmployee() {
           {
             name: "roleName",
             type: "list",
-// is there a way to make the options here the results of a query that selects all departments?`
+
             message: "What role does the employee have?",
             choices: function() {
              rolesArray = [];
@@ -195,7 +190,7 @@ async function addEmployee() {
               }
           }
           ]) 
-// in order to get the id here, i need a way to grab it from the departments table 
+
         .then(function(answer) {
         console.log(answer);
         const role = answer.roleName;
@@ -255,7 +250,7 @@ function updateRole() {
           {
             name: "employeeName",
             type: "list",
-// is there a way to make the options here the results of a query that selects all departments?`
+
             message: "Which employee's role is changing?",
             choices: function() {
              employeeArray = [];
@@ -268,17 +263,11 @@ function updateRole() {
               }
           }
           ]) 
-// in order to get the id here, i need a way to grab it from the departments table 
+
         .then(function(answer) {
         console.log(answer);
         const name = answer.employeeName;
-        /*const role = answer.roleName;
-        connection.query('SELECT * FROM role', function(err, res) {
-            if (err) throw (err);
-            let filteredRole = res.filter(function(res) {
-                return res.title == role;
-            })
-        let roleId = filteredRole[0].id;*/
+    
         connection.query("SELECT * FROM role", function(err, res) {
                 inquirer
                 .prompt ([
@@ -314,7 +303,7 @@ function updateRole() {
                      })
                 })
             
-            //})
+            
        })
 })
 
